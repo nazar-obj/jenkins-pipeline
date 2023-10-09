@@ -22,9 +22,9 @@ node () {
 
         def code = load 'scripts/common/common.Groovy'
         code.example1()   
+        def awsCredential = code.getAwsCredential(environment);
 
-            
-
+        installIngress(awsCredential)	
     }
 
 }
