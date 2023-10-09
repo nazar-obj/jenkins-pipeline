@@ -13,7 +13,7 @@ def stringParameter(name, description, defaultValue="") {
 
 node () {
     stage ('Init') {
-        def exampleModule = load "@script/common.Groovy"
+        def exampleModule = load "scripts/common/@script/common.Groovy"
         def awsCredential = exampleModule.getAwsCredential(environment);
 
         installIngress(awsCredential)
