@@ -11,3 +11,5 @@ def getAwsCredential(xxx) {
             error("No credentials found for \"${xxx}\" environment.")
     }
 }
+
+return this
