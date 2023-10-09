@@ -13,7 +13,7 @@ def stringParameter(name, description, defaultValue="") {
 
 def getAwsCredential(xxx) {
     switch(xxx) {
-        case "en1":
+        case "env1":
             return [
                     cluster: "eks-liferay-d1",
                     credential:"aws-credential-demo-1",
