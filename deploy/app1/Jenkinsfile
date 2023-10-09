@@ -17,6 +17,9 @@ node () {
         sh """
         pwd
         ls -R
+        echo `xxxxxxxxxxxxxx`
+        cat deploy/app1/commons.Groovy
+        echo `xxxxxxxxxxxxxx`
         """
         def exampleModule = load "deploy/app1/commons.Groovy"
         def awsCredential = exampleModule.getAwsCredential(environment);
