@@ -1,0 +1,63 @@
+properties([
+        [$class: 'ParametersDefinitionProperty',
+         parameterDefinitions: [
+                 stringParameter("hostName","Host name","xxxxx"),
+                 choice(choices: ['env1', 'env2', 'env3'], description: 'Environment to deploy', name: 'environment')
+         ]
+        ]
+])
+
+def stringParameter(name, description, defaultValue="") {
+    return [ name: name, description: description, $class: 'StringParameterDefinition', defaultValue: defaultValue]
+}
+
+def getAwsCredential(xxx) {
+    switch(xxx) {
+        case "dev":
+            return [
+                    cluster: "eks-liferay-d1",
+                    credential:"aws-credential-demo-1",
+                    role: "arn:aws:iam::865657477340:role/aws-dev-eks-role",
+                    region: "us-east-1"
+            ];
+        default:
+            error("No credentials found for \"${xxx}\" environment.")
+    }
+}
+
+node () {
+    stage ('Init') {
+        def awsCredential = getAwsCredential(environment);
+        installIngress(awsCredential)
+    }
+
+}
+
+def installIngress(awsCredential) {
+    withAWS(credentials: awsCredential.credential, role: awsCredential.role, region: awsCredential.region) {
+        withEnv(["KUBECONFIG=${env.WORKSPACE}/.${env.cluster}/.kube/config"]) {
+            dir('deploy/ingress') {
+                sh """
+                    echo "######"
+                    pwd
+                    echo "######"
+                    aws sts get-caller-identity
+                    echo "######"
+                    aws eks update-kubeconfig --name ${awsCredential.cluster}
+                    echo "######"
+                    
+                    kubectl get pods -A
+                    echo "######"
+                    helm list -A
+                    echo "######"
+                    
+                    
+                """
+            }
+        }
+    }
+}
+
+
+
+
