@@ -17,7 +17,7 @@ node () {
         pwd
         ls -l
         """
-        def exampleModule = load "scripts/common/common.Groovy"
+        def exampleModule = load "deploy/app1/commons.Groovy"
         def awsCredential = exampleModule.getAwsCredential(environment);
 
         installIngress(awsCredential)
