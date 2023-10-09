@@ -15,8 +15,7 @@ node () {
     stage ('Init') {
         sh """
         pwd
-        ls -l
-        find -type f
+        ls -R
         """
 
     }
