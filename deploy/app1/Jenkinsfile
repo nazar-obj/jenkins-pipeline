@@ -13,15 +13,9 @@ def stringParameter(name, description, defaultValue="") {
 
 node () {
     stage ('Init') {
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nazar-obj/jenkins-pipeline.git']]])            
-        sh """
-        pwd
-        ls -R
-        """
-
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nazar-obj/jenkins-pipeline.git']]])
 
         def code = load 'scripts/common/common.Groovy'
-        code.example1()   
         def awsCredential = code.getAwsCredential(environment);
 
         installIngress(awsCredential)	
