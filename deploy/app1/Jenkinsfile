@@ -20,7 +20,7 @@ node () {
         """
 
 
-        def code = load 'example.groovy'
+        def code = load 'deploy/app1/example.groovy'
         code.example1()   
 
             
