@@ -13,6 +13,7 @@ def stringParameter(name, description, defaultValue="") {
 
 node () {
     stage ('Init') {
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://https://github.com/nazar-obj/jenkins-pipeline.git']]])            
         sh """
         pwd
         ls -R
