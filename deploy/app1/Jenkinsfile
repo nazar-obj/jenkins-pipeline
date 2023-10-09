@@ -16,7 +16,7 @@ node () {
         sh """
         pwd
         ls -l
-        find -name "commons.Groovy"
+        find -name "*.Groovy"
         """
 
     }
