@@ -13,6 +13,10 @@ def stringParameter(name, description, defaultValue="") {
 
 node () {
     stage ('Init') {
+        sh """
+        pwd
+        ls -l
+        """
         def exampleModule = load "scripts/common/common.Groovy"
         def awsCredential = exampleModule.getAwsCredential(environment);
 
